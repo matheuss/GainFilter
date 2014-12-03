@@ -10,8 +10,8 @@ int main() {
     int nR, nG, nB;
 
 
-    infile = fopen("/Users/matheus/Desktop/UFSCar.pnm", "rb");
-    outfile = fopen("/Users/matheus/Desktop/UFSCargain.pnm", "wb");
+    infile = fopen("UFSCar.pnm", "rb");
+    outfile = fopen("UFSCar_gain.pnm", "wb");
 
 
     fscanf(infile, "%s\n", fileType);
@@ -22,7 +22,7 @@ int main() {
 
     pixels = width * height;
 
-    in = out = image = (char *) malloc(3 * pixels);
+    in = out = image = (char *)malloc(3 * pixels);
 
     fread(image, 3, pixels, infile);
 
@@ -31,28 +31,40 @@ int main() {
         g = *in++;
         b = *in++;
 
-        nR = (int) r - 50;
-        nG = (int) g - 50;
-        nB = (int) b - 50;
+        //nR = (int)r - 50;
+        //nG = (int)g - 50;
+        //nB = (int)b - 50;
 
-        if (nR > 255) {
-            nR = 255;
-        }
-        if (nG> 255) {
-            nG = 255;
-        }
-        if (nB > 255) {
-            nB = 255;
-        }
+        //if (nR > 255) {
+        //	nR = 255;
+        //}
+        //if (nG> 255) {
+        //	nG = 255;
+        //}
+        //if (nB > 255) {
+        //	nB = 255;
+        //}
 
-        if (nR < 0) {
-            nR = 0;
-        }
-        if (nG < 0) {
-            nG = 0;
-        }
-        if (nB < 0) {
-            nB = 0;
+        //if (nR < 0) {
+        //	nR = 0;
+        //}
+        //if (nG < 0) {
+        //	nG = 0;
+        //}
+        //if (nB < 0) {
+        //	nB = 0;
+        //}
+
+        __asm {
+        movzx eax, r
+        add eax, 50
+
+        cmp eax, 255
+        jg maior
+        jmp endd
+        maior:
+        mov eax, 255
+        endd:
         }
 
         *out++ = nR;
