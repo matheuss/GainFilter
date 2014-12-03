@@ -96,9 +96,26 @@ int main() {
                 mov ebx, depth // then green = depth
 
             blue:
+            cmp ecx, 0 // if blue < 0
+            jl truncate_small_b
+
+            blue_big:
+                cmp ecx, depth // if blue > depth
+                jg  truncate_big_b
+                jmp next_
+
+            truncate_small_b: // if blue < 0
+                mov ecx, 0 // then blue = 0
+                jmp blue_big
+
+            truncate_big_b: // if green > depth
+                mov ecx, depth // then green = depth
+
+            next_:
 
             mov nR, eax
-            mov nB, ebx
+            mov nG, ebx
+            mov nB, ecx
         }
 
         *out++ = nR;
