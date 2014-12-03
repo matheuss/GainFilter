@@ -7,11 +7,13 @@ int main() {
     char fileType[10], *in, *out, *image;
     int width, height, depth, pixels;
     unsigned char r, g, b;
-    int nR, nG, nB;
+    int nR, nG, nB, brightness, contrast;
 
+    brightness = 50;
+    contrast = 3;
 
-    infile = fopen("UFSCar.pnm", "rb");
-    outfile = fopen("UFSCar_gain.pnm", "wb");
+    infile = fopen("\\\\psf\\Home\\Desktop\\UFSCar.pnm", "rb");
+    outfile = fopen("\\\\psf\\Home\\Desktop\\UFSCargain.pnm", "wb");
 
 
     fscanf(infile, "%s\n", fileType);
@@ -56,15 +58,25 @@ int main() {
         //}
 
         __asm {
-        movzx eax, r
-        add eax, 50
+            movzx eax, r
+            add eax, brightness
 
-        cmp eax, 255
-        jg maior
-        jmp endd
-        maior:
-        mov eax, 255
-        endd:
+            cmp eax, 0
+            jg truncate_small_r
+
+            red_big:
+                cmp eax, depth
+                jl truncate_big_r
+                jmp green
+
+            truncate_small_r:
+                mov eax, 0
+                jmp red_big
+
+            truncate_big_r:
+            mov eax, depth
+
+            green:
         }
 
         *out++ = nR;
