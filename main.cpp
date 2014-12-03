@@ -33,30 +33,6 @@ int main() {
         g = *in++;
         b = *in++;
 
-        //nR = (int)r - 50;
-        //nG = (int)g - 50;
-        //nB = (int)b - 50;
-
-        //if (nR > 255) {
-        //	nR = 255;
-        //}
-        //if (nG> 255) {
-        //	nG = 255;
-        //}
-        //if (nB > 255) {
-        //	nB = 255;
-        //}
-
-        //if (nR < 0) {
-        //	nR = 0;
-        //}
-        //if (nG < 0) {
-        //	nG = 0;
-        //}
-        //if (nB < 0) {
-        //	nB = 0;
-        //}
-
         __asm {
             movzx eax, r // r += brightness amount
             add eax, brightness
