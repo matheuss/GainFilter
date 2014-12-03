@@ -58,25 +58,47 @@ int main() {
         //}
 
         __asm {
-            movzx eax, r
+            movzx eax, r // r += brightness amount
             add eax, brightness
 
-            cmp eax, 0
+            movzx ebx, g // g += brightness amount
+            add ebx, brightness
+
+            cmp eax, 0 // if red < 0
             jg truncate_small_r
 
             red_big:
-                cmp eax, depth
+                cmp eax, depth // if reg > depth
                 jl truncate_big_r
                 jmp green
 
-            truncate_small_r:
-                mov eax, 0
+            truncate_small_r: // if red < 0
+                mov eax, 0 // then red = 0
                 jmp red_big
 
-            truncate_big_r:
-            mov eax, depth
+            truncate_big_r: // if red > depth
+                mov eax, depth // then red = depth
 
             green:
+            cmp ebx, 0 // if green < 0
+            jl truncate_small_g
+
+            green_big:
+                cmp ebx, depth // if green > depth
+                jg truncate_big_g
+                jmp blue
+
+            truncate_small_g: // if green < 0
+                mov ebx, 0 // then green = 0
+                jmp green_big
+
+            truncate_big_g: // if green > depth
+                mov ebx, depth // then green = depth
+
+            blue:
+
+            mov nR, eax
+            mov nB, ebx
         }
 
         *out++ = nR;
