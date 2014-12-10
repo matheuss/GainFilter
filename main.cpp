@@ -40,6 +40,24 @@ int main() {
             movzx ebx, g
             movzx ecx, b
 
+            sub eax, 128 // contrast threshold
+            sub ebx, 128 // contrast threshold
+            sub ecx, 128 // contrast threshold
+
+            mul contrast // contrast factor multiplication - red channel
+            mov esi, eax
+            mov eax, ebx
+            mul contrast // contrast factor multiplication - green channel
+            mov ebx, eax
+            mov eax, ecx
+            mul contrast // contrast factor multiplication - blue channel
+            mov ecx, eax
+            mov eax, esi
+
+            add eax, 127 // contrast threshold
+            add ebx, 127 // contrast threshold
+            add ecx, 127 // contrast threshold
+
             add eax, brightness // r += brightness amount
             add ebx, brightness // g += brightness amount
             add ecx, brightness // b += brightness amount
