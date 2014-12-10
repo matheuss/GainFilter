@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
@@ -10,6 +11,9 @@ int main() {
     int width, height, depth, pixels;
     unsigned char r, g, b;
     int nR, nG, nB, brightness, contrast;
+
+    clock_t start, end;
+    double cpu_time_used;
 
     brightness = 0;
     contrast = 4;
@@ -30,6 +34,7 @@ int main() {
 
     fread(image, 3, pixels, infile);
 
+    start = clock();
     for (int i = 0; i < pixels; i++) {
         r = *in++;
         g = *in++;
@@ -75,6 +80,7 @@ int main() {
         *out++ = nG;
         *out++ = nB;
     }
+    end = clock();
 
     fwrite(image, 3, pixels, outfile);
 
@@ -83,6 +89,9 @@ int main() {
 
     free(image);
 
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("time = %f seconds\n", cpu_time_used);
+    system("PAUSE");
 
     return 0;
 }
