@@ -42,7 +42,7 @@ int main() {
 
             add eax, brightness // r += brightness amount
             add ebx, brightness // g += brightness amount
-            add ecx, brightness// b += brightness amount
+            add ecx, brightness // b += brightness amount
 
             mov nR, eax
             mov nG, ebx
