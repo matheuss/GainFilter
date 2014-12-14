@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
     FILE *infile, *outfile;
-    char fileType[10], *in, *out, *image, *inn;
+    char fileType[10], *in, *out, *image;
     int width, height, depth, pixels;
     unsigned char r, g, b;
     int nR, nG, nB;
@@ -25,11 +25,18 @@ int main() {
     fprintf(outfile, "%d %d %d%c", width, height, depth, 10);
 
     pixels = width * height;
-    printf("%d", pixels);
 
-    in = inn = out = image = (char *) malloc(3 * pixels);
-    fread(image, 3, pixels, infile);
+    int extra = 16 - (pixels % 16); // the number of pixels that lack to pixels % 16 = 0
+    if (extra == 16) { // if the number of pixels is multiple of 16, the above calculation will provide a wrong result (16 - 0 = 16)
+        extra = 0; // then, we have to fix it, so that any additional pixels will be allocated.
+    }
 
+    in = out = image = (char *) malloc(3 * (pixels + extra));
+    fread(image, 3, pixels + extra, infile);
+
+    for (int i = 0; i < 3 * extra; i++) {
+        image[(3*pixels) + i] = 0; // fill extra pixels with zeros
+    }
 
     unsigned char red[16], green[16], blue[16], brightness[16], contrast[16], base[16];
 
