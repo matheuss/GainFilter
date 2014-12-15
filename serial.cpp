@@ -121,13 +121,13 @@ int truncate(int threshold, int value) {
         jmp endd
 
         truncate_small :
-        mov eax, 0
-        jmp endd
+            mov eax, 0
+            jmp endd
         truncate_big :
-        mov eax, threshold
+            mov eax, threshold
 
         endd :
-        mov value, eax
+            mov value, eax
     }
     return value;
 }
