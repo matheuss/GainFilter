@@ -5,7 +5,7 @@ using namespace std;
 
 int truncate(int, int);
 
-int main() {
+int main(int argc, char * argv []) {
     FILE *infile, *outfile;
     char fileType[10], *in, *out, *image;
     int width, height, depth, pixels;
@@ -15,12 +15,28 @@ int main() {
     clock_t start, end;
     double cpu_time_used;
 
-    brightness = 0;
-    contrast = 4;
+    brightness = 50;
+    contrast = 2;
 
-    infile = fopen("\\\\psf\\Home\\Desktop\\UFSCar.pnm", "rb");
-    outfile = fopen("\\\\psf\\Home\\Desktop\\UFSCargain.pnm", "wb");
+    if (argc < 3) {
+        printf("Usage: %s <input.pnm> <output.pnm>\n", argv[0]);
+        system("PAUSE");
+        exit(1);
+    }
 
+    infile = fopen(argv[1], "rb");
+    if (!infile) {
+        printf("File %s not found!\n", argv[1]);
+        system("PAUSE");
+        exit(1);
+    }
+
+    outfile = fopen(argv[2], "wb");
+    if (!outfile) {
+        printf("Unable to create file %s!\n", argv[2]);
+        system("PAUSE");
+        exit(1);
+    }
 
     fscanf(infile, "%s\n", fileType);
     fprintf(outfile, "%s%c", fileType, 10);
@@ -90,8 +106,7 @@ int main() {
     free(image);
 
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("time = %f seconds\n", cpu_time_used);
-    system("PAUSE");
+    printf("Serial time   = %f seconds\n", cpu_time_used);
 
     return 0;
 }
@@ -105,14 +120,14 @@ int truncate(int threshold, int value) {
         jg truncate_big
         jmp endd
 
-        truncate_small:
-            mov eax, 0
-            jmp endd
-        truncate_big:
-            mov eax, threshold
+        truncate_small :
+        mov eax, 0
+        jmp endd
+        truncate_big :
+        mov eax, threshold
 
-        endd:
-            mov value, eax
+        endd :
+        mov value, eax
     }
     return value;
 }
