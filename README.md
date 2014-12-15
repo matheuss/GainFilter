@@ -18,7 +18,7 @@ O algoritimo utilizado para as alterações de bilho e contraste será basicamen
 
 ## Problemas e Resultados
 
-Verificamos através de testes com diversas imagens, obtivemos os resultados esperados na versão serial. Entretanto, na versão paralela, ocorreram problemas no contraste devido a soma saturada, pois utilizamos esta soma com 16 inteiros de 8 bits sem sinal (PADDIUSB), isso acarreta em um problema para a situação em que o valor do canal for menor que 128 (p.e 110), ao final da aplicação de contraste ele sera, erroneamente, substítuido por 128. Com isso, a imagem resultante será diferente da versão serial no que diz respeito ao contraste apenas. Não conseguimos obter uma solução para este problema a tempo.
+Verificamos através de testes com diversas imagens, que obtivemos os resultados esperados na versão serial. Entretanto, na versão paralela, ocorreram problemas no contraste devido a soma saturada, pois utilizamos esta soma com 16 inteiros de 8 bits sem sinal (PADDIUSB), isso acarreta em um problema para a situação em que o valor do canal for menor que 128 (p.e 110), ao final da aplicação de contraste ele será erroneamente substítuido por 128. Com isso, a imagem resultante será diferente da versão serial no que diz respeito ao contraste apenas. Não conseguimos obter uma solução para este problema a tempo.
 
 Em relação ao processamento, em todos os casos de testes a versão paralela foi mais rápida (cerca da metade do tempo).
 
