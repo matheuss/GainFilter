@@ -22,13 +22,45 @@ Verificamos através de testes com diversas imagens, obtivemos os resultados esp
 
 Em relação ao processamento, em todos os casos de testes a versão paralela foi mais rápida (cerca da metade do tempo).
 
-Gráfico do processamento:
+## Gráfico do processamento:
 ![](http://imagizer.imageshack.us/v2/1280x1024q90/901/0gO5SV.png)
 
-Resultados das imagens:
+## Resultados das imagens:
 
 Beach original:
+![](http://imagizer.imageshack.us/v2/1280x1024q90/674/q5Bz59.jpg)
+
 
 Beach serial:
+![](http://imagizer.imageshack.us/v2/1280x1024q90/537/Qwrtaz.jpg)
+
 
 Beach paralela:
+![](http://imagizer.imageshack.us/v2/1280x1024q90/911/Q6Uu33.jpg)
+
+
+Lorikeet original:
+
+![](http://imagizer.imageshack.us/v2/1280x1024q90/661/U19CAY.jpg)
+
+
+Lorikeet serial:
+
+![](http://imagizer.imageshack.us/v2/1280x1024q90/540/STpfAv.jpg)
+
+
+Lorikeet paralela:
+
+![](http://imagizer.imageshack.us/v2/1280x1024q90/913/RP1cOk.jpg)
+
+
+Torre original:
+![](http://imagizer.imageshack.us/v2/1280x1024q90/674/qe5dGl.jpg)
+
+
+Torre serial:
+![](http://imagizer.imageshack.us/v2/1280x1024q90/911/HY1DhJ.jpg)
+
+
+Torre paralela:
+![](http://imagizer.imageshack.us/v2/1280x1024q90/905/lVSgZA.jpg)
